@@ -98,25 +98,37 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="w-full flex flex-col"
           >
-            {screen === 'dashboard' && profile && (
-              <Dashboard profile={profile} onNavigate={setScreen} />
-            )}
-            {screen === 'chart' && profile && (
-              <BirthChart profile={profile} />
-            )}
-            {screen === 'compatibility' && profile && (
-              <Compatibility userProfile={profile} />
-            )}
-            {screen === 'transits' && (
-              <Transits />
-            )}
-            {screen === 'chat' && profile && (
-              <Chat profile={profile} />
-            )}
-            {screen === 'profile' && profile && (
-              <Profile profile={profile} onLogout={handleLogout} />
-            )}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={screen}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-full"
+              >
+                {screen === 'dashboard' && profile && (
+                  <Dashboard profile={profile} onNavigate={setScreen} />
+                )}
+                {screen === 'chart' && profile && (
+                  <BirthChart profile={profile} />
+                )}
+                {screen === 'compatibility' && profile && (
+                  <Compatibility userProfile={profile} />
+                )}
+                {screen === 'transits' && (
+                  <Transits />
+                )}
+                {screen === 'chat' && profile && (
+                  <Chat profile={profile} />
+                )}
+                {screen === 'profile' && profile && (
+                  <Profile profile={profile} onLogout={handleLogout} />
+                )}
+              </motion.div>
+            </AnimatePresence>
             
             <BottomNav current={screen} onNavigate={setScreen} />
           </motion.div>

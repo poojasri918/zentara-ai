@@ -16,9 +16,32 @@ export function Onboarding({ onComplete }: OnboardingProps) {
   const [birthTime, setBirthTime] = useState("12:00");
   const [name, setName] = useState("");
 
-  const nextStep = () => setStep(s => s + 1);
+  const isStepValid = () => {
+    if (step === 1) return !!birthDate;
+    if (step === 2) return !!name.trim() && !!birthPlace.trim();
+    return true;
+  };
+
+  const nextStep = () => {
+    if (isStepValid()) {
+      setStep(s => s + 1);
+    }
+  };
+
+  const handleSkip = () => {
+    // Provide a default "Explorer" profile if they skip
+    onComplete({
+      name: "Cosmic Seeker",
+      birthDate: "1995-01-01",
+      birthPlace: "Paris, FR",
+      birthTime: "12:00",
+      zodiacSign: ZodiacSign.Capricorn,
+      ascendant: "Aries"
+    });
+  };
 
   const handleFinish = () => {
+    if (!isStepValid()) return;
     const date = new Date(birthDate);
     const sign = getZodiacSign(date);
     onComplete({
@@ -26,7 +49,8 @@ export function Onboarding({ onComplete }: OnboardingProps) {
       birthDate,
       birthPlace,
       birthTime,
-      zodiacSign: sign
+      zodiacSign: sign,
+      ascendant: "Leo" // Defaulting ascendant for now as we don't have a full calculation engine
     });
   };
 
@@ -40,7 +64,12 @@ export function Onboarding({ onComplete }: OnboardingProps) {
           </div>
           <span className="font-sans font-light tracking-[0.2em] text-lg text-white uppercase">ZENTARA</span>
         </div>
-        <button className="text-xs uppercase tracking-widest text-slate-400 hover:text-primary transition-colors">Skip</button>
+        <button 
+          onClick={handleSkip}
+          className="text-xs uppercase tracking-widest text-slate-400 hover:text-primary transition-colors px-2 py-1"
+        >
+          Skip
+        </button>
       </header>
 
       {/* Progress */}
@@ -87,7 +116,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
-                  className="w-full bg-slate-900/40 border border-white/10 rounded-2xl p-4 text-center font-mono text-2xl text-white focus:outline-none focus:border-primary/50"
+                  className="w-full bg-slate-900/40 border border-white/10 rounded-2xl p-4 text-center font-mono text-2xl text-white focus:outline-none focus:border-primary/50 appearance-none"
                 />
               </GlassCard>
             )}
@@ -149,7 +178,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
                     type="time"
                     value={birthTime}
                     onChange={(e) => setBirthTime(e.target.value)}
-                    className="bg-transparent font-mono text-xl text-white border-none focus:ring-0 w-24"
+                    className="bg-transparent font-mono text-xl text-white border-none focus:ring-0 w-24 outline-none"
                   />
                   <Clock className="text-slate-500 size-5" />
                 </div>
@@ -164,11 +193,21 @@ export function Onboarding({ onComplete }: OnboardingProps) {
         <div className="max-w-md mx-auto space-y-4">
           <button
             onClick={step < 3 ? nextStep : handleFinish}
-            className="w-full bg-indigo-600 text-white font-bold py-5 rounded-2xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all active:scale-95 uppercase tracking-widest text-sm"
+            disabled={!isStepValid()}
+            className={`w-full font-bold py-5 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 uppercase tracking-widest text-sm ${
+              isStepValid() 
+              ? "bg-indigo-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]" 
+              : "bg-white/5 text-slate-600 border border-white/5 cursor-not-allowed"
+            }`}
           >
             {step < 3 ? "Continue" : "Calculate Chart"}
-            <ArrowRight className="size-5" />
+            <ArrowRight className={`size-5 transition-transform ${isStepValid() ? "translate-x-0" : "translate-x-1 opacity-0"}`} />
           </button>
+          {!isStepValid() && (
+             <p className="text-center text-[10px] text-red-400 font-mono tracking-widest uppercase animate-pulse">
+               Missing required celestial details
+             </p>
+          )}
           <p className="text-center text-[9px] text-slate-600 font-mono tracking-widest uppercase">
             Zentara Encryption Active • Secure Astrological Data
           </p>

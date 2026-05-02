@@ -1,66 +1,20 @@
-# 🌌 Zentara — AI-Powered Astrology App
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Zentara is an AI-driven astrology experience that transforms personal birth data into interactive, real-time insights through a conversational cosmic assistant.
+# Run and deploy your AI Studio app
 
----
+This contains everything you need to run your app locally.
 
-## 🚀 Live App  
-👉 https://zentara-236597150924.europe-west2.run.app/
+View your app in AI Studio: https://ai.studio/apps/85303f75-10f0-4f41-a03f-898c87e40b03
 
----
+## Run Locally
 
-## 🎥 Demo Video  
-🎬 https://youtu.be/xJlplQzKbP8
+**Prerequisites:**  Node.js
 
----
 
-## 📸 Screenshots  
-
-<p align="center">
-  <img src="./home.jpeg" width="250"/>
-  <img src="./aichat.jpeg" width="250"/>
-  <img src="./oracle.jpeg" width="250"/>
-  <img src="./companionship.jpeg" width="250"/>
-  <img src="./profile.jpeg" width="250"/>
-</p>
-
----
-
-## ✨ Features
-
-- 🔮 Personalized daily horoscope insights  
-- 🧠 AI-powered “Cosmic Oracle” chat assistant  
-- 💞 Synastry compatibility analysis  
-- 🌙 Mood-based adaptive astrology guidance  
-- 🌌 Real-time celestial events and transits  
-- 👤 User profile with birth chart context  
-
----
-
-## 🧠 How It Works
-
-Zentara combines:
-- User birth data (date, time, location)  
-- Astrological logic  
-- AI-generated responses via Gemini API  
-
-to create a personalized and interactive astrology experience.
-
----
-
-## ⚙️ Tech Stack
-
-- Frontend: AI-generated UI (Flutter/Web)  
-- AI: Gemini API  
-- Deployment: Cloud-based public URL  
-- Development: AI-assisted workflow (AI Studio + prompt engineering)  
-
----
-
-## 📌 Note
-
-This project was built using AI-assisted development tools, focusing on rapid prototyping, design iteration, and functional delivery.
-
----
-
-✨ From static predictions to interactive guidance — Zentara redefines astrology with AI.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
