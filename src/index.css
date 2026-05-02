@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Noto Serif", serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "Space Grotesk", monospace;
+
+  --color-primary: #818cf8; /* Indigo 400 */
+  --color-primary-dark: #6366f1; /* Indigo 500 */
+  --color-secondary: #c084fc; /* Purple 400 */
+  --color-accent: #38bdf8; /* Sky 400 */
+  --color-deep-space: #05070A;
+  --color-glass-surface: rgba(11, 14, 20, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+}
+
+@layer base {
+  body {
+    @apply bg-deep-space text-slate-200 font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.05) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+}
+
+.glass-card {
+  @apply bg-glass-surface backdrop-blur-2xl border border-glass-border rounded-3xl;
+}
+
+.text-indigo-glow { @apply text-primary drop-shadow-[0_0_8px_rgba(129,140,248,0.4)]; }
+.bg-indigo-glow { @apply bg-primary shadow-[0_0_20px_rgba(99,102,241,0.3)]; }
