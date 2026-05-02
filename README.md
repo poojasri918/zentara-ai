@@ -5,7 +5,7 @@ Zentara is an AI-driven astrology experience that transforms personal birth data
 ---
 
 ## 🚀 Live App  
-👉 https://ai.studio/apps/85303f75-10f0-4f41-a03f-898c87e40b03
+👉 https://zentara-236597150924.europe-west2.run.app/
 
 ---
 
